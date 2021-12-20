@@ -1,0 +1,242 @@
+#!/bin/bash
+#!/usr/bin/bash
+#!/usr/bin/env bash
+
+#
+# M3TIOR 2018
+# 	Upon completion I will place a description and MIT license here
+#
+
+#---------------------------INIT GLOBAL DEFAULTS--------------------------------
+INITIATOR="${BASH_SOURCE[0]}"
+while [ -h "$INITIATOR" ]; do
+	CONTAINER="$( cd -P "$( dirname "$INITIATOR" )" && pwd )"
+	INITIATOR="$(readlink "$INITIATOR")"
+	[[ $INITIATOR != /* ]] && INITIATOR="$CONTAINER/$INITIATOR"
+done
+CONTAINER="$( cd -P "$( dirname "$INITIATOR" )" && pwd )"
+#-------------------------------------------------------------------------------
+
+_gnu_defaults(){
+	#NOTE: GNU STANDARD IMPLEMENT
+	#	Used for installing packages to appropriate locations
+	#
+	#XXX: local helper copy and paste
+	#	local prefix exec_prefix bindir sbindir libexecdir datarootdir \
+	#			datadir sysconfdir sharedstatedir localstatedir runstatedir \
+	#			includedir oldincludedir docdir infodir htmldir dvidir pdfdir \
+	#			psdir libdir lispdir localedir mandir
+	prefix=/usr/local;
+	exec_prefix=$prefix;
+	bindir=$exec_prefix/bin;
+	sbindir=$exec_prefix/sbin;
+	libexecdir=$exec_prefix/libexec;
+	datarootdir=$prefix/share;
+	datadir=$datarootdir;
+	sysconfdir=$prefix/etc;
+	sharedstatedir=$prefix/com;
+	localstatedir=$prefix/var;
+	runstatedir=$localstatedir/run;
+	includedir=$prefix/include;
+	oldincludedir=/usr/include;
+	docdir=$datarootdir/doc;
+	infodir=$datarootdir/info;
+	htmldir=$docdir;
+	dvidir=$docdir;
+	pdfdir=$docdir;
+	psdir=$docdir;
+	libdir=$prefix/lib;
+	lispdir=$datarootdir/emacs/site-lisp;
+	localedir=$datarootdir/locale;
+	mandir=$datarootdir/man;
+}
+
+_necro_defaults(){
+	#NOTE:
+	#	all necronomicon configuration variables must be
+	#	prefaced by [ NECRO_ ]. This is being used as a countermeasure
+	#	to prevent specific environment variables from being overwritten
+	#	by accident. This is a script after all, so if someone wants to
+	#	hack it, isn't very hard for them to modify this file directly.
+	#
+	NECRO_BIN="$CONTAINER/necromancies/bin";
+	NECRO_LIB="$CONTAINER/necromancies/lib";
+	NECRO_DAT="$CONTAINER/necromancies/share";
+	NECRO_VERBOSITY=0;
+	NECRO_AUTO_UPDATE=false;
+	NECRO_AUTO_UPDATE_CONFIG="";
+}
+
+_parse_necro_config(){
+	local IFS;
+	local LABEL;
+	local VARIABLE;
+	local VALUE;
+
+	if ! [ -e $1 ]; then
+		error "file '$1' does not exist!";
+	elif [ -d $1 ]; then
+		error "config file cannot be type 'directory'";
+	fi;
+
+	while read line; do
+		local COMMENT_REMOVED="${line%%[#]*}";
+		IFS=";"; for DECLARATION in "COMMENT_REMOVED"; do
+			local VARIABLE="${DECLARATION%%[=]*}";
+			local VALUE="${DECLARATION##*[=]}";
+			for LABEL in NECRO_{A..Z} NECRO_{a..z}; do
+				if [ "$VARIABLE" == "$LABEL" ]; then
+					eval "$VARIABLE=\"$VALUE\"";
+					continue 1;
+				fi;
+				return 1;
+			done;
+		done;
+	done < "$1";
+}
+
+#NOTE: integrated logging
+debug(){
+	local V; [[ -n "$VERBOSITY" ]] && V=$VERBOSITY || V=$NECRO_VERBOSITY;
+	local O; [[ -t 1 ]] && O="\e[95mdebug\e[39m: $1" || O="debug: $1";
+	if [ $V -gt 2 ]; then echo -e "$O"; fi;
+}
+info(){
+	local V; [[ -n "$VERBOSITY" ]] && V=$VERBOSITY || V=$NECRO_VERBOSITY;
+	local O; [[ -t 1 ]] && O="\e[34minfo\e[39m: $1" || O="info: $1";
+	if [ $V -gt 1 ]; then echo -e "$O"; fi;
+}
+notice(){
+	local V; [[ -n "$VERBOSITY" ]] && V=$VERBOSITY || V=$NECRO_VERBOSITY;
+	local O; [[ -t 1 ]] && O="\e[36mnotice\e[39m: $1" || O="notice: $1";
+	if [ $V -gt 0 ]; then echo -e "$O"; fi;
+}
+warning(){
+	local V; [[ -n "$VERBOSITY" ]] && V=$VERBOSITY || V=$NECRO_VERBOSITY;
+	local O; [[ -t 1 ]] && O="\e[33mwarning\e[39m: $1" || O="warning: $1";
+	if [ $V -gt -1 ]; then echo -e "$O"; fi;
+}
+error(){
+	local V; [[ -n "$VERBOSITY" ]] && V=$VERBOSITY || V=$NECRO_VERBOSITY;
+	local O; [[ -t 1 ]] && O="\e[31merror\e[39m: $1" || O="error: $1";
+	if [ $V -gt -2 ]; then echo -e "$O"; fi;
+}
+
+
+configure(){
+	local VERSION;				VERSION="1.0";
+	local OPTARG; 				OPTARG='';
+	local OPTIND; 				OPTIND=0;
+	local IFS; 					IFS=' ';
+	local CUSTOM;				CUSTOM='';
+	local ECODE;				ECODE=0;
+	while getopts ":hv:c:n:" arg; do
+		case $arg in
+			'c') CUSTOM=$OPTARG;;
+			'n') echo ;;
+			'v') local VERBOSITY=$OPTARG;;
+			'h')
+				echo "Usage: $0 -h [-v LEVEL] [-n PATH] [-c PATH]";
+				echo "\t-c\tUses PATH in the place of the default configuration file.";
+				echo "\t-n\tMakes PATH a new default necro-conf.";
+				echo "\t-v\t'Verbose' changes logging verbosity.";
+				echo "\t-h\tPrint's this message.";
+				return 0;
+			;;
+			[?])
+				echo "Usage: $0 -hv [-n PATH] [-c PATH]" >&2;
+				exit 1;
+			;;
+		esac;
+	done;
+	if [ $CUSTOM != "" ] && [ -e $CUSTOM ]; then
+		# if we're supplied with a custom configuration file,
+		# attempt to use it's settings first
+		_parse_necro_config "$CUSTOM"; ECODE=$?;
+		if [ $ECODE -eq 0 ]; then
+			return;
+		fi;
+
+	elif [ -e ./.necro-conf ]; then
+		# otherwise, if we have a config in the current directory use it
+		# with highest priority by default.
+		_parse_necro_config "./.necro-conf"; ECODE=$?;
+		if [ $ECODE -eq 0 ]; then
+			return;
+		fi;
+
+	elif [ -e ~/.necro-conf ]; then
+		# if we have a config in our home directory use it.
+		_parse_necro_config "~/.necro-conf"; ECODE=$?;
+		if [ $ECODE -eq 0 ]; then
+			return;
+		fi;
+	fi;
+
+	# if we have no other options, load defaults
+	_necro_defaults;
+	# we have to load these before we log anything to capture config
+	# verbosity
+
+	# or, well... rather we enforce the defaults
+	warning "could not find configuration file.";
+	notice "loading defaults...";
+	return $ECODE;
+}
+
+interactive(){
+	echo ">>> M3TIOR's Necronomicon v$VERSION"
+	while true; do
+		read -p ""
+	done;
+}
+
+install(){
+	if [ $1 == "python3" ] || [ $1 == "pip3" ]; then
+		echo;
+	fi;
+	if [ $1 == "node" ] || [ $1 == "npm" ]; then
+		echo;
+	fi;
+}
+
+update(){
+	echo
+}
+
+remove(){
+	echo
+}
+
+exec(){
+	echo
+}
+
+export(){
+	echo
+}
+
+
+#------------------------ EXECUTE MAIN SCRIPT ---------------------------------#
+ECODE=0;
+INTERACTIVE=0;
+while getopts ":hic:v:n:" arg; do
+	case $arg in
+		'i') INTERACTIVE=1;;
+		'v') VERBOSITY=$OPTARG;;
+		'c') CONFIGURATOR=$OPTARG;;
+		'h')
+			echo "Usage: $0 -h [-v LEVEL] [-nc PATH]";
+			echo "\t-c\tUses PATH as the configuration file.";
+			echo "\t-n\tMakes PATH a new default necro-conf.";
+			echo "\t-v\t'Verbose' changes logging verbosity.";
+			echo "\t-h\tPrint's this message.";
+			return 0;
+		;;
+		[?])
+			echo "Usage: $0 -h [-v LEVEL] [-nc PATH]" >&2;
+			exit 1;
+		;;
+	esac;
+done;
+[[ -n $CONFIGURATOR ]] && configure || configure -c

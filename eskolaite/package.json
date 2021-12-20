@@ -1,0 +1,30 @@
+{
+  "name": "eskolaite",
+  "version": "1.0.0",
+  "description": "A chromium wrapper that turns your local chromium instance into a reasonably secure, reasonably anonymous, javascript capable tor browser using uBlockOrigin and puppeteer.",
+  "main": "eskolaite.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m3tior/eskolaite.git"
+  },
+  "keywords": [
+    "chromium",
+    "puppeteer",
+    "annonymity",
+    "tor",
+    "onion-browser",
+    "onion-browsing",
+    "uBlockOrigin",
+    "wrapper",
+    "script"
+  ],
+  "author": "Ruby Allison Rose",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/m3tior/eskolaite/issues"
+  },
+  "homepage": "https://github.com/m3tior/eskolaite#readme"
+}

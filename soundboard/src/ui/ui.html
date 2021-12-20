@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Chaosboard</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta charset="utf-8" />
+		<!--
+		<link rel="stylesheet" href="/assets/dcode.css" />
+		<link rel="stylesheet" href="keyboard/Keyboard.css" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		-->
+		<link rel="stylesheet" href="./ui.css" />
+		<link href="./lib-css/material-icons.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div id="settings">
+			<label>Discord Application Key</label><input type="text" />
+			<label>Discord OAUTH Key</label><input type="text" />
+			<label>Use global hotkeys</label><input type="checkbox" />
+			<label>Primary Color</label><input type="color" />
+			<label>Secondary Color</label><input type="color" />
+		</div>
+		<div id="player">
+			<div id="volume">
+				<i class="fa fa-volume-down"></i>
+				<div id="volume-slider"></div>
+				<i class="fa fa-volume-up"></i>
+			</div>
+		</div>
+		<virtual-keyboard />
+		<div id="keyboard"></div>
+		<div id="library"></div>
+
+		<script type="module" src="./ui.mjs"></script>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "name": "qt-styles",
+  "version": "0.0.1",
+  "description": "All of M3TIOR's system wide Qt styles",
+  "scripts": {
+    "build": "node tools/build.unifier.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m3tior/qt-styles.git"
+  },
+  "keywords": [
+    "qt4",
+    "qt5",
+    "styles",
+    "css",
+    "less",
+    "qss"
+  ],
+  "author": "Ruby Allison Rose (aka: M3TIOR)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/m3tior/qt-styles/issues"
+  },
+  "homepage": "https://github.com/m3tior/qt-styles#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "argparse": "^1.0.0",
+    "clean-css-loader": "^1.1.0",
+    "css-loader": "^2.1.1",
+    "extract-loader": "^3.1.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "inert-entry-webpack-plugin": "^4.0.2",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "webpack": "^4.29.6"
+  }
+}

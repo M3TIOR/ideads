@@ -1,0 +1,24 @@
+sudo: required
+
+language: generic
+
+notifications: # set notification options
+    email: false
+
+branches:
+    only:
+        - master
+        - bleeding-edge
+
+before_install:
+    - sudo apt-get update
+    - sudo apt-get install make dash
+    - echo "Building Repository"
+    - make all mode=build debug=true
+    - make all mode=test debug=true
+
+install:
+    - make all mode=install debug=true
+
+after_success:
+    - echo "Success!"

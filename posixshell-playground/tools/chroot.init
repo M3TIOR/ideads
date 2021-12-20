@@ -1,0 +1,54 @@
+#!/bin/sh
+
+# M3TIOR 2017
+#
+#	Chroot INIT file:
+#		this file exists to provide path data and other variables for
+#		the testing chroot
+#
+
+# initial path define to enable appending
+PATH=				""; # executable path for sh
+LD_LIBRARY_PATH=	""; # path to linked libraries
+
+# TEST ENVIRONMENT PATH
+PATH+= "/bin":;
+PATH+= "/sbin":;
+PATH+= "/usr/bin":;
+PATH+= "/usr/sbin":;
+PATH+= "/usr/games":;
+PATH+= "/usr/local/bin":;
+PATH+= "/usr/local/sbin":;
+PATH+= "/usr/local/games":;
+
+# SHADOWROOT PATH
+PATH+= "shadowroot/bin":;
+PATH+= "shadowroot/sbin":;
+PATH+= "shadowroot/usr/bin":;
+PATH+= "shadowroot/usr/sbin":;
+PATH+= "shadowroot/usr/games":;
+PATH+= "shadowroot/usr/local/bin":;
+PATH+= "shadowroot/usr/local/sbin":;
+PATH+= "shadowroot/usr/local/games":;
+
+while getopts ":if:" o; do
+	case $o; in
+		'i')
+			cat << WELCOME
+				========================= WELCOME ============================
+				to the testkit chroot. Here, you can manually test any
+				command you wish from the safety of the chroot. All packages
+				you've built are available, nothing else. So have a look around
+				cd. Do whatever. And when you're ready to end testing, just
+				type exit
+			WELCOME
+			while read -p "$PS1$$$PWD$PS2" LINE; do
+				$LINE;
+			done;
+		;;
+		'f')
+			exec $OPTARG;
+		;;
+		[?]);;
+	esac;
+done;

@@ -1,0 +1,72 @@
+The following is a datasheet comprised of all the UNICODE characters by category.
+I plan to use this for generating unicode compliant universal regex functions for things
+like special characters, alphabetic characters, and numeric characters.
+
+// This is helpful! https://unicode.org/reports/tr18/
+
+Rules:
+* Control Characters within the unicode spectrum will be omitted from this list.
+* Whitespace characters on this list will be counted on under their own category.
+  If not immediately visible, or would otherwise break the english text rendering,
+  will be listed in Range( decimal ) format, follwed by the name of the character.
+* Any non-constant numbers / numbers that act as a function, acting upon another number or word,
+  will be treated as a special character.
+* Any symbol not used as a number, alpha, white or control will be treated as a special character.
+
+Each category will be divided by it's Unicode Character Set, then subcategorized by type.
+For example, the Latin Basic character set has special, whitespace, numeric, upper, and lowercase
+characters. So it will be ordered as the following:
+--------------------------------------------------------------------------------------
+Language inconsistencies, Underscore and Backtic are represented under \w; investigate!
+--------------------------------------------------------------------------------------
+
+Latin Basic Whitespace
+Range ( 9, 32 ) Tab, Space
+
+Latin Basic Special (Omitted 127,)
+Range ( 32 - 47 ) --> !"#$%&'()*+,-./
+Range ( 58 - 64 ) --> :;<=>?@
+Range ( 91 - 96 ) --> [\]^_\`
+Range ( 123 - 126 ) --> {|}~
+
+Latin Basic Numbers
+Range ( 48 - 57 ) --> 0123456789
+
+Latin Basic Uppercase
+Range ( 65 - 90 ) --> ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+Latin Basic Lowercase
+Range ( 97 - 122 ) --> abcdefghijklmnopqrstuvwxyz
+
+
+Latin Supplemental Whitespace
+Range ( 160 ) No Break Space -->  
+Range ( 173 ) Soft Hyphen -- > ­
+
+Latin Supplemental Special (Omitted 128 - 159, 173)
+Range ( \u00a1-\u00ac ) --> ¡¢£¤¥¦§¨©ª«¬
+Range ( \u00ae-\u00bb ) --> ®¯°±²³´µ¶·¸¹º»
+Range ( \u00bf\u00d7\u00f7 ) --> ¿÷×
+
+Latin Supplemental Number
+Range ( \u00bc-\u00be ) --> ¼½¾
+
+Latin Supplemental Uppercase
+Range ( 192 - 214, 216 - 222 ) --> ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ
+
+Latin Supplemental Lowercase
+Range ( 223 - 246, 248 - 255 ) --> ßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ
+
+
+Latin Extended Uppercase
+Range ( index * 2 ~ ish ) --> ĀĂĄĆĈĊČĎĐĒĔĖĘĚĜĞĠĢĤĦĨĪĬĮİĲĴĶĹĻĽĿŁŃŅŇŊŌŎŐŒŔŖŘŚŜŞŠŢŤŦŨŪŬŮŰŲŴŶŸŹŻŽ
+
+Latin Extended Lowercase
+Range ( index * 2 + 1 ~ ish ) --> āăąćĉċčďđēĕėęěĝğġģĥħĩīĭįıĳĵķĸĺļľŀłńņňŉŋōŏőœŕŗřśŝşšţťŧũūŭůűųŵŷźżžſ
+
+
+
+
+
+Unicode Number Forms
+Range ( 8528 - 8591 ) --> ⅐⅑⅒⅓⅔⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞⅟ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫⅬⅭⅮⅯⅰⅱⅲⅳⅴⅵⅶⅷⅸⅹⅺⅻⅼⅽⅾⅿↀↁↂↃↄↅↆↇↈ↉↊↋↌↍↎↏

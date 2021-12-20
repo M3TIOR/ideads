@@ -1,0 +1,14 @@
+  ---
+ gnome-sound-applet ---
+ nm-applet ---
+ xcompmgr ---
+ feh --bg-fill ~/.i3/settings.d/bg.png ---
+ pactl set-sink-volume 0 $(cat ~/.i3/settings.d/volume)% ---
+ xbacklight -set $(cat ~/.i3/settings.d/light) ---
+  ---
+ gnome-sound-applet ---
+ nm-applet ---
+ xcompmgr ---
+ feh --bg-fill ~/.i3/settings.d/bg.png ---
+ pactl set-sink-volume 0 $(cat ~/.i3/settings.d/volume)% ---
+ xbacklight -set $(cat ~/.i3/settings.d/light) ---

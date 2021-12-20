@@ -1,0 +1,66 @@
+v = 20;
+v = 0
+Backlight Brightened
+Backlight Dimmed
+v = 10;
+Backlight Brightened
+v = 20;
+Backlight Brightened
+v = 30;
+Backlight Brightened
+v = 20
+Backlight Dimmed
+v = 10
+Backlight Dimmed
+volume lowered; v=45
+volume lowered; v=45
+volume lowered; v=45
+volume lowered; v=45
+volume lowered; v=45
+volume lowered; v=45
+volume lowered; v=45
+volume increased; v=55
+volume increased; v=55
+volume increased; v=55
+volume increased; v=55
+volume lowered; v=45
+volume increased; v=55
+volume lowered; v=45
+volume increased; v=55
+volume increased; v=55
+volume increased; v=55
+volume lowered; v=45
+volume increased; v=55
+volume lowered; v=45
+volume increased; v=55
+volume lowered; v=45
+volume increased; v=55
+volume lowered; v=45
+volume increased; v=55
+volume lowered; v=45
+volume increased; v=55
+volume lowered; v=50
+volume lowered; v=45
+volume lowered; v=40
+volume lowered; v=35
+volume lowered; v=30
+volume lowered; v=25
+volume lowered; v=20
+volume lowered; v=15
+volume lowered; v=10
+volume lowered; v=5
+volume increased; v=10
+volume increased; v=15
+volume increased; v=20
+volume increased; v=25
+volume increased; v=30
+volume increased; v=35
+volume increased; v=40
+volume increased; v=45
+volume increased; v=50
+volume increased; v=55
+volume increased; v=60
+volume increased; v=65
+volume increased; v=70
+volume increased; v=75
+volume increased; v=80

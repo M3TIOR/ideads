@@ -1,0 +1,11 @@
+#M3TIOR 2016
+#this file consists of all my prerequsite onlaunch applications and
+#it's where you'll put yours if you want to maintain my system.
+
+#------------------------------------------------------START DEPENDENCIES
+nm-applet
+xcompmgr
+feh --bg-fill ~/.i3/settings/bg.png
+pactl set-sink-volume 0 $(cat ~/.i3/settings/volume)%
+xbacklight -set $(cat ~/.i3/settings/light)
+#------------------------------------------------------END DEPENDENCIES

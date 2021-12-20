@@ -1,0 +1,86 @@
+#!/bin/sh
+
+#this file needs to be able to autotonamously boot bochs after
+#compiling a new binary when one doesn't exist.
+
+#DONE
+
+depcheck(){
+	if [ -e "/usr/bin/bochs" ]; then
+		echo "bochs found: running init..."
+	else
+		echo "bochs not installed. Exiting..."
+		exit 0;
+	fi
+}
+
+#when one does, the user needs to decide whether or not to load the old binary or
+#compile a new one.
+
+#DONE
+
+init(){
+	if [ -d "/tmp/Osmium_src" ]; do
+	else
+		mkdir /tmp/Osmium_src
+	fi
+	
+	if [ -e "/tmp/Osmium_src/Osmium.img" ]; do
+		echo "Temporary folder is unclean. Fixing..."
+		rm /tmp/Osmium_src/Osmium.img
+	fi
+	
+	if [ -e "./../build/Osmium" ]; then
+		echo "A previous build has been found!"
+		echo "Would you like to create a new one?"
+		while true; do
+			read choice
+			case $choice in
+				[Yy]*)echo "Loading builder...";exec ./compile;exec ./disk_tools/gendisk;break;;
+				[Nn]*)echo "Continuing with previous Build...";exec ./disk_tools/gendisk;break;;
+				*)echo "please enter any variation of Yes or No to proceed.";;
+			esac
+		done
+	else
+		echo "Loading builder..."
+		exec ./compile;
+		exec ./disk_tools/gendisk;
+	fi
+}
+
+#we need to load the kernel into the floppy generated to fit it
+#... never mind, handled by gendisk...
+
+#DEPRICATED
+
+#then load the floppy into
+#our loop device.
+
+#DONE
+
+if [ -e "/tmp/Osmium_src/Osmium.img"] do
+	sudo /sbin/losetup /dev/loop0 /tmp/Osmium_src/Osmium.img
+else
+	echo "Um, something must have gone wrong because I could have sworn"
+	echo "I just compiled that damn disk image..."
+	echo ""
+	echo "Well... I guess something went wrong now didn't it..."
+	echo "Exiting..."
+	exit
+fi
+
+
+
+#once that's all done load bochs with specified boot device.
+
+#DONE
+
+sudo bochs -f ./res/bochs_conf.txt
+sudo /sbin/losetup -d /dev/loop0
+
+
+
+
+
+
+

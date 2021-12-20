@@ -1,0 +1,37 @@
+#!/bin/sh
+# For the general purpose of keeping the temporary folder clean!
+
+# er' well to be more specific, keeping our junk out of it when it doesn't need to be there.
+# This particular scripts job is to check and see if any script of this project
+# is using the temporary folder workspace "Osmium_src" and remove the directory when not in use.
+
+# Oh wow, that's redundant...
+# ANNNYWAYYYYY...
+
+somethingisopen=0;
+
+if [ -e "/tmp/Osmium_src" ];then
+	if [ -d "/tmp/Osmium_src" ];then
+		if [ -e "/tmp/Osmium_src/*.pid" ];then
+			for entries in "/tmp/Osmium_src/*.pid";do
+				pidfocus=$(cat $entries)
+				ps cax | grep pidfocus
+				if [ $? -eq 0 ];then
+					somethingisopen=1;
+				else
+					rm $entries
+				fi
+			done
+		else
+			rm -rf "/tmp/Osmium_src"
+		fi
+	else
+		rm -rf "/tmp/Osmium_src"
+	fi
+fi
+
+if [ $somethingisopen -eq 0 ];then
+	rm -rf "/tmp/Osmium_src"
+fi
+
+#so that's the end of this file...

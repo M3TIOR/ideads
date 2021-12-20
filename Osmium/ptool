@@ -1,0 +1,66 @@
+#!/bin/sh
+
+#M3TIOR 2015
+#
+# project tools container script.
+# this is meant to encapsulate all the helpfull scripts that the project needs while keeping the
+# overhead on each tool to a minimum.
+#
+# every script executed with this script will be executed as if it's being executed in this script's context.
+# in other words... it makes the scripts' directory structure unified.
+# which can be helpfull when making a compile script or build configuration tools.
+#
+#
+
+#NOTE:
+#       something anyone using this tiny script should be aware of is it's pmetah file configuration;
+#       it was meant to be used for describing a help context and list the functions in a tool folder.
+#       which could also included short descriptions of the commands uses, much like the microsoft cmd's help command.
+
+_virt_dir="./tools"
+_glob_exit_toggle=0;
+_glob_git_ptv=$(cat ./.git/project_meta/ptool.version); #yes you can change this if you want to use the script...
+
+#&&& END GLOBVARS
+
+#&&& END FUNCTIONS
+
+#&&& END DEPCHECKS
+
+#&&& END DEPRESOLVES
+
+echo "Osmium project tools v$_glob_git_ptv:"
+echo "\"please use responsibly, or as directed by a doctor.\""
+echo ">"
+echo ">"
+echo ">"
+
+while [ $_glob_exit_toggle -eq 0 ]; do
+        read -p "exec:::" input;
+        case $input in
+                [Ee][Xx][Ii][Tt])
+                        if [ _virt_dir != "./tools" ]; then
+                                tmp=${_virt_dir##*/};
+                                _virt_dir=${_virt_dir%/$tmp};
+                                unset tmp;
+                        else
+                                exit 0;
+                        fi
+                ;;
+                [Hh][Ee][Ll][Pp])
+                        if [ -e $_virt_dir/pmetah ]; then
+                                cat $_virt_dir/pmetah;
+                        else
+                                ls $_virt_dir;
+                        fi
+                ;;
+                *)
+                        if [ -d $_virt_dir/$input ]; then
+                                _virt_dir=$_virt_dir/$input;
+                                ls $_virt_dir;
+                        else
+                                $_virt_dir/$input;
+                        fi
+                ;;
+        esac
+done;

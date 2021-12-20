@@ -1,0 +1,12 @@
+#M3TIOR 2016
+#this file consists of all my prerequsite onlaunch applications and
+#it's where you'll put yours if you want to maintain my system.
+
+#------------------------------------------------------#
+gnome-sound-applet
+nm-applet
+xcompmgr
+feh --bg-fill ~/.i3/settings.d/bg.png
+pactl set-sink-volume 0 $(cat ~/.i3/settings.d/volume)%
+xbacklight -set $(cat ~/.i3/settings.d/light)
+#------------------------------------------------------#

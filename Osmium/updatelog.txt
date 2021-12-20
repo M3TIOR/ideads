@@ -1,0 +1,26 @@
+M3TIOR 2015
+
+March,3 2015:
+	Project begins. Mbr loaded and tested
+	
+	Proposed new Idea, no global partitioning table, instead, A filesystem capable of supporting
+	subsystems. Reducing the yeald of a mbr and increasing the efficiency of disk space.
+	
+	I should probably log that to AstroFS card on trello...
+
+March,14 2015:
+	Project reformated. stuff happens and I'm happy about that.
+	
+	To Elaborate a little, I added some dev tools.
+	
+	More are coming in the future as I need them so be prepaired for that.
+	As for the rest of the project I have yet to actually start.
+	I figured I should make my job easier before I begin the project
+	so I don't have to do it later. Plus if any of you wonderful people
+	need the tools they're here for yeh.
+
+March,19 2015:
+	Ok, so there's a thing that I just had to learn...
+	I'm going to have to target x86 systems and above!
+	Weeeeeeew right!.... no, I fucking hate it...
+	because now I can't keep the promise of the project...

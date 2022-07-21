@@ -2,6 +2,8 @@
 A (potentially) slightly less secure, way to browse the web with tor using chromium. (An experiment. As a nod to the one rando hacker person from an Asian country who's following me now, plz try and find some 'non social exploitation' vulns dude.)
 
 
+TODO: add a link to UBlockOrigin
+
 ## oxide todo
  * [x] Change advanced filter defaults.
  * [ ] Disable Javascript by default.

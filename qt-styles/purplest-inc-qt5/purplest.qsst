@@ -1,0 +1,588 @@
+/* ================================================ *
+author:lei
+lastedited:2020.2
+* ================================================ */
+/*Pallete*/
+$lightestActive = #cda4ec;
+$lighterActive = #c28beb;
+$lightActive = #b871eb;
+$brightestActive = #ad56ec;
+$brighterActive = #a33aef;
+$brightActive = #991df3;
+$active = #8229c3;
+$primary = #6b00b9;
+$darkActive = #7710c3;
+$darkerActive = #642a8f;
+$darkestActive = #491e68;
+$darkestBase = #101010;
+$darkerBase = #1a1a1a;
+$darkBase = #202020;
+$base = #222222;
+$brightBase = #232323;
+$brighterBase = #292929;
+$brightestBase = #333333;
+$lightBase = #3a3a3a;
+$lighterBase = #414141;
+$lightestBase = #555555;
+$alt = #aaa;
+$altSubtle = #555555;
+$altHighlight = #fff;
+$altSelected = #fff;
+
+
+$text = #aaa; /* Same as alt */
+$background = #202020; /* Same as darkBase */
+$border = #000;
+$selected = #292929; /* hover; Same as brightestBase */
+$pressed = #642a8f; /* Same as darkerActive */
+$focused = #a33aef; /* actived; Same as brighterActive */
+$grad1a = #EEEEEF; /*gradient start*/
+$grad1b = #DADADF; /*gradient end*/
+
+/* ICONS
+Checkmark: url('data:image/svg+xml;utf8,<svg width="36px" height="36px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet"><path fill="#31373D" d="M34.459 1.375a2.999 2.999 0 0 0-4.149.884L13.5 28.17l-8.198-7.58a2.999 2.999 0 1 0-4.073 4.405l10.764 9.952s.309.266.452.359a2.999 2.999 0 0 0 4.15-.884L35.343 5.524a2.999 2.999 0 0 0-.884-4.149z"></path></svg>');
+*/
+
+QWidget
+{
+    color: $text;
+    background-color: $base;
+	font-family: 'Trebuchet MS', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
+}
+
+QFrame{
+    color: $text;
+    background-color: $darkestBase;
+}
+QMainWindow {
+	background-color: $darkerBase;
+}
+QMainWindow::separator{
+    border: 1px solid $darkerActive;
+    border-style: outset;
+    width: 4px;
+    height: 4px;
+}
+QMainWindow::separator:hover{
+    background: $selected;
+}
+QSplitter::handle{
+    border: 1px solid $border;
+    border-style: outset;
+    width: 4px;
+    height: 4px;
+}
+QSplitter::handle:hover{/*splitter->handle(1)->setAttribute(Qt::WA_Hover, true);才生效*/
+    border-color: $focused;
+}
+QSplitter::handle:pressed{
+    border-color: $pressed;
+}
+QSizeGrip{
+    background-color: none;
+}
+
+/* =============================================== */
+/* Label                                           */
+/* =============================================== */
+QLabel {
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 1px;
+}
+
+
+/* A QLabel is a QFrame ... */
+/* A QToolTip is a QLabel ... */
+QToolTip {
+    border: 1px solid $border;
+    padding: 5px;
+    border-radius: 3px;
+    opacity:210;
+}
+
+/* =============================================== */
+/* TextBox                                         */
+/* =============================================== */
+QLineEdit {
+    background: $background;/*不建议设为透明，否则table编辑时会字显示*/
+    selection-background-color: $selected;
+    border: 1px solid $border;
+    border-radius: 2px;
+    border-style: inset;
+    padding: 0 1px;
+}
+
+QLineEdit:hover{
+    border-color: $selected;
+}
+QLineEdit:focus{
+    border-color: $focused;
+}
+/*QLineEdit[readOnly="true"] { color: gray }*/
+QLineEdit[echoMode="2"]{
+    lineedit-password-character: 9679;/*字符的ascii码35 88等 */
+}
+
+QLineEdit:read-only {
+    color: lightgray;
+}
+
+QLineEdit:disabled{
+    color: lightgray;
+    background: lightgray;
+}
+
+QTextEdit{
+    selection-background-color:$selected;
+    border: 1px solid $border;
+    border-style: inset;
+}
+QTextEdit:hover{
+    border-color: $selected;
+}
+QTextEdit:focus{
+    border-color: $focused;
+}
+/* =============================================== */
+/* Button                                          */
+/* =============================================== */
+QPushButton {
+    border: 1px solid $border;
+    border-radius: 2px;
+    /*background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, 
+        stop: 0 $grad1a, stop: 0.05 $grad1b,stop: 0.5 $grad1b, 
+        stop: 0.9 $grad1a, stop: 1 $grad1a);*/
+    padding: 1px 4px;
+    min-width: 50px;
+    min-height: 16px;
+}
+
+QPushButton:hover{
+    background-color: $selected;
+    border-color: $pressed;
+}
+
+QPushButton:pressed
+{
+    border-width: 1px;      
+    background-color: $pressed;
+    border-color: $border;
+}
+
+QPushButton:focus, QPushButton:default {
+    border-color: $focused; /* make the default button prominent */
+}
+
+
+QToolButton,QToolButton:unchecked { /* ToolBar里的按钮和带下拉菜单的按钮 */
+    border: 1px solid transparent;
+    border-radius: 3px;
+    background-color: transparent;
+    margin: 1px;
+}
+QToolButton:checked{
+    background-color: $selected;
+    border-color: $pressed;
+}
+QToolButton:hover{
+    background-color: $selected;
+    border-color: $pressed;
+}
+
+QToolButton:pressed,QToolButton:checked:hover{
+    background-color: $pressed;
+    border-color: $focused;
+}
+QToolButton:checked:pressed{
+    background-color: $selected;
+}
+
+/* only for MenuButtonPopup */
+QToolButton[popupMode="1"]{
+    padding-left: 1px;
+    padding-right: 15px; /* make way for the popup button */
+    border: 1px solid $border;
+    min-height: 15px;
+    /*background: qlineargradient(x1:0, y1:0 ,x2:0, y2:1
+        stop: 0 $grad1a, stop: 0.05 $grad1b, stop: 0.5 $grad1b
+        stop: 0.95 $grad1a stop: 1$grad1a)*/
+}
+QToolButton[popupMode="1"]:hover{
+    background-color: $selected;
+    border-color: $pressed;
+}
+QToolButton[popupMode="1"]:pressed{
+    border-width: 1px;
+    background-color: $pressed;
+    border-color: $border;
+}
+QToolButton::menu-button {
+    border: 1px solid $border;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    width: 16px;
+}
+
+QCheckBox:disabled, QRadioButton:disabled {
+	background-color: $darkerBase;
+	color: $altSubtle;
+}
+QCheckBox::indicator::checked:disabled,
+QCheckBox::indicator::unchecked:disabled,
+QRadioButton::indicator::checked:disabled,
+QRadioButton::indicator::unchecked:disabled {
+	background-color: $base;
+}
+
+QCheckBox, QRadioButton {
+	background-color: transparent;
+}
+QCheckBox::indicator {
+	border: 1px solid $darkestBase;
+	width: 16px;
+	height: 16px;
+	border-radius: 2px;
+}
+QCheckBox::indicator::unchecked {
+	background-color: $lighterBase;}
+QCheckBox::indicator::unchecked:hover {
+	background-color: $lightestBase;
+}
+QCheckBox::indicator::checked {
+	background-color: $primary;
+}
+QCheckBox::indicator::checked:hover {
+	background-color: $brightActive;
+}
+QRadioButton::indicator {
+	border: 1px solid $darkestBase;
+	width: 16px;
+	height: 16px;
+	border-radius: 8px;
+}
+QRadioButton::indicator::unchecked {
+	background-color: $lighterBase;
+}
+QRadioButton::indicator::unchecked:hover {
+	background-color: $lightestBase;
+}
+QRadioButton::indicator::unchecked:pressed {
+	border-color: $primary;
+	background: qradialgradient(
+		cx:0.5, cy:0.5, radius: 0.4,
+		fx:0.5, fy:0.5,
+		stop: 0.25 $primary,
+		stop: 0.251 $brighterBase,
+		stop: 1 $brighterBase
+	);
+}
+QRadioButton::indicator::checked {
+	border-color: $primary;
+	background: qradialgradient(
+		cx:0.5, cy:0.5, radius: 0.4,
+		fx:0.5, fy:0.5,
+		stop: 0.6 $primary,
+		stop: 0.61 $base,
+		stop: 1 $base
+	);
+}
+/*
+QRadioButton::indicator::checked:hover {
+	border-color: $primary;
+	background: qradialgradient(
+		cx:0.5, cy:0.5, radius: 0.4,
+		fx:0.5, fy:0.5,
+		stop: 0.3 $primary,
+		stop: 0.31 $base,
+		stop: 0.9 $base,
+		stop: 0.91 $primary,
+		stop: 1 $primary
+	);
+}*/
+
+
+/* =============================================== */
+/* Slider ProgressBar                              */
+/* =============================================== */
+QProgressBar {
+    border: 1px solid $border;
+    border-radius: 10px;
+    text-align: center;
+}
+
+QProgressBar::chunk {
+    background-color: $focused;
+    width: 4px;
+    margin: 0px;
+}
+QProgressBar::chunk:last-child {
+	background: transparent;
+}
+
+QSlider{
+    border: 1px solid transparent;
+}
+QSlider::groove{
+    border: 1px solid $border;
+    background: $background;
+}
+QSlider::handle {/*设置中间的那个滑动的键*/                           
+    border: 1px solid $border;
+    background: $selected;
+}
+QSlider::groove:horizontal {
+    height: 3px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
+    left:5px; right: 5px;
+}
+QSlider::groove:vertical{
+    width: 3px;
+    top: 5px; bottom: 5px;
+}
+QSlider::handle:horizontal{
+    width: 6px;
+    margin: -7px; /* height */
+}
+QSlider::handle:vertical{
+    height: 6px;
+    margin: -7px; /* height */
+}
+QSlider::add-page{/*还没有滑上去的地方*/
+    border: 1px solid $border;
+    background:$grad1a;
+}
+QSlider::sub-page{/*已经划过的从地方*/                            
+    background: $focused;
+}
+
+/* =============================================== */
+/* ScrollBar      COMPLETED; AS GOOD AS IT GETS                                    
+/* =============================================== */
+QScrollBar{
+    background-color: $brighterBase;
+	border: 0px;
+	border-radius: 0px;
+    height: 10px;
+    width: 10px;
+}
+/* NOTE: Don't try implementing pressed; rendering is borked...*/
+QScrollBar:hover{
+    background-color: $brightestBase;
+}
+QScrollBar::handle{
+	/* NOTE: Black outline on Atom not possible here. It screws up
+	 *   Up the rendering of the handle and makes the edges look all jank.
+	 */
+    border-radius: 4px;
+    background: $primary;
+    min-width: 15px;
+    min-height: 15px;
+}
+QScrollBar::handle:hover {
+    background: $brightActive;
+}
+QScrollBar::add-line, QScrollBar::sub-line,
+QScrollBar::add-page, QScrollBar::sub-page {
+    width: 0px;
+    background: transparent;
+}
+QScrollArea{
+    border: none;
+}
+/*QScrollArea  QAbstractSlider{
+    border-radius: 0px;
+}*/
+/* =============================================== */
+/* DockWidget                                       */
+/* =============================================== */
+QDockWidget, QDockWidget > QWidget/*not work*/
+{
+    border-color: $border;/*qt bug*/
+    background-color: $darkBase;
+	width: 100%;
+}
+QDockWidget::title {
+	background-color: $darkerBase;
+    border-bottom: 1px solid $border;
+    border-style: inset;
+    text-align: left; /* align the text to the left */
+    padding: 6px;
+}
+
+/* =============================================== */
+/* GroupBox                                        */
+/* =============================================== */
+QGroupBox {
+    background-color: $background;
+    border: 1px solid $border;
+    border-radius: 4px;
+    margin-top: 0.5em;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 1em;
+	top: 0.1em;
+    background-color: $background;
+}
+/* =============================================== */
+/* ToolBox                                         */
+/* =============================================== */
+QToolBox{
+    border: 1px solid $border;
+}
+QToolBox::tab {
+    background: $grad1a;
+    border: 1px solid $border;
+    border-radius: 1px;
+}
+QToolBox::tab:hover {
+    background-color: $selected;
+    border-color: transparent;
+}
+QToolBox::tab:pressed {
+    background-color: $pressed;
+    border-color: transparent;
+}
+QToolBox::tab:selected {
+    font-weight: bold;
+    border-color: $selected;
+}
+
+/* =============================================== */
+/* TabWidget  COMPLETED MOSTLY                         */
+/* =============================================== */
+QTabWidget::pane{
+	border: 0px;
+    border-top: 1px solid $border;
+}
+QTabWidget::tab-bar {
+	/*Hack; QSS doesn't support responsive styling yet.*/
+	width: 100000px;
+}
+QTabBar {
+	border-bottom: 5px solid $darkerBase;
+	background-color: $base;
+}
+QTabBar::tab {
+	background-color: transparent;
+    padding: 7px 12px 7px 12px;
+	margin: 10px 0px 0px 0px;
+	border: 0px solid;
+	border-bottom: 4px solid $darkerBase;
+}
+QTabBar::tab:first {
+	margin-left: 15px;
+}
+QTabBar::tab:last {	
+	margin-right: 15px;
+}
+QTabBar::tab:hover {
+    background: $selected;
+}
+QTabBar::tab:selected {
+	color: $altHighlight;
+	/*NOTE: for some reason this renderer makes the text look bolder than
+	 *  normal, and I can't fix that. It's a slight difference; hopefully
+	 *  it doesn't trigger my OCD :\
+	 */
+    background: $darkerBase;
+    border: 1px solid $darkestBase;
+    border-bottom: 4px solid $primary;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+QTabBar::tab:selected:hover {
+	background: $darkBase;
+}
+QTabBar::tab:focus {
+	/* TODO: make this look better somehow; more elegant...*/
+    border-color: $primary;
+}
+
+/*
+QTabBar::tab:top{
+    margin-top: 3px;
+    border-bottom: transparent;
+    margin-right: 1px;
+}
+QTabBar::tab:bottom{
+    margin-bottom: 3px;
+    border-top: transparent;
+    margin-right: 1px;
+}
+QTabBar::tab:left{
+    border-right: transparent;
+    margin-bottom: 1px;
+}
+QTabBar::tab:right{
+    border-left: transparent;
+    margin-bottom: 1px;
+}*/
+
+/* =============================================== */
+/* QHeaderView for list table                      */
+/* =============================================== */
+QHeaderView {
+	border: none;
+	margin: 0px;
+	padding: 0px;
+}
+QHeaderView::section, QTableCornerButton::section {/*设置表头属性*//*左上角*/
+	background-color: $grad1a;
+	padding: 0 3px;
+	border-right: 1px solid $border;
+	border-bottom: 1px solid $border;
+	border-radius: 0px;
+}
+QHeaderView::section:hover, QTableCornerButton::section:hover{
+    background-color: $selected;
+}
+QHeaderView::section:pressed{
+    background-color: $pressed;
+}
+QHeaderView::section:checked {
+    background-color: $focused;
+}
+
+/* =============================================== */
+/* QTableWidget                                    */
+/* =============================================== */
+QTableWidget, QTableView
+{
+    gridline-color: $border;    /*表格中的网格线条颜色*/
+    background: $background;
+    /*设置交替颜色，需要在函数属性中设置:tableWidget->setAlternatingRowColors(true)*/
+    alternate-background-color: $grad1a;
+    /*selection-color:$background;    鼠标选中时前景色：文字颜色*/
+    selection-background-color:$selected;   /*鼠标选中时背景色*/
+    border:1px solid $border;  /*边框线的宽度、颜色*/
+    /*border:none;    去除边界线*/
+    /*border-radius:5px;*/
+    /*padding:10px 10px;*/  /*表格与边框的间距*/
+}
+QTableView::item, QTabWidget::item{
+    background: transparent;
+	outline-style: none;
+	border: none;
+}
+
+QTableView::item:hover {
+	background: $selected;
+    border: 1px solid $focused;
+}
+
+QTableView::item:selected {
+	background: $selected;
+	color: $grad1a;
+}
+
+QTableView::item:selected:active {
+	background: $pressed;
+	color: $grad1a;
+}
+
+QTableWidget QComboBox{
+    margin: 2px;
+    border: none;
+}

@@ -17,7 +17,7 @@
  * ============================================================================
  */
 
-@primary-color: #6b00b9;
+@primary-color: #6b00b9; //#6b00b9
 @primary-color-hover: lighten(@primary-color, 15%);
 @primary-color-active: darken(@primary-color, 15%);
 
@@ -34,6 +34,7 @@
 @active: lighten(desaturate(@primary-color, 35%), 10%);
 @dark-active: lighten(desaturate(@primary-color, 15%), 5%);
 @darker-active: desaturate(@primary-color, 45%);
+@darkest-active: darken(desaturate(@primary-color, 45%), 10%);
 
 @alt-color: #aaa;
 @alt-color-subtle: @lightest-base;
@@ -91,53 +92,102 @@
 
 
 /*---------------------------- END CORE UI -----------------------------------*/
+/**
+ * Here I'm defining all the color values that will be used in each respective
+ * element so I can more easily find and adjust the color values when necessary.
+ * Because I'd really rather not dig though boatloads of styling to find them.
+ */
 
-// Global Defaults
-@base-background-color: lighten(darken(@dark-base, 1.5%), 5%);
-@base-border-color: @darkest-base;
+
+
+@text-color: #aaa;
+@text-color-subtle: @lightest-base;
+@text-color-highlight: #fff;
+@text-color-selected: @text-color-highlight;
+
+/**
+ * META COLORS
+ *
+ * These colors have a more general influence, they are the base anchors which
+ * influence the theme as a whole.
+ */
+@background: @darker-base;
+@border: @darkest-base;
+@text: #aaa; // DENOTE
+@event-text:transparent; // (links ect.)
+@value-text:transparent;
+@active-event-element: @primary-color; // elements that trigger events outside themselves;
+@active-event-element-hover: @primary-color-hover;
+@active-event-element-pressed: @primary-color-active;
+@active-event-element-bg: @brighter-base;
+@active-event-element-bg-hover: @base;
+@active-event-element-bg-pressed: @dark-base;
+@inactive-event-element:transparent;
+@inactive-event-element-hover:transparent;
+@inactive-event-element-pressed:transparent;
+@inactive-event-element-bg:transparent;
+@inactive-event-element-bg-hover:transparent;
+@inactive-event-element-bg-pressed:transparent;
+@active-value-element:transparent; // elements that store a value;
+@active-value-element-hover:transparent;
+@active-value-element-pressed:transparent;
+@active-value-element-bg:transparent;
+@active-value-element-bg-hover:transparent;
+@active-value-element-bg-pressed:transparent;
+@inactive-value-element:transparent;
+@inactive-value-element-hover:transparent;
+@inactive-value-element-pressed:transparent;
+@inactive-value-element-bg:transparent;
+@inactive-value-element-bg-hover:transparent;
+@inactive-value-element-bg-pressed:transparent;
 
 // QWidget
-@app-background-color: @darker-base;
+@app-background-color: @background;
+
+// Input Elements
+@textbox-background-color: @base;
+@textbox-border-color: @border;
+
+@button-background: @active-event-element-bg;
+@button-text: @active-event-element;
+@button-border: @border;
+
+
 
 // Toolbar
 @tool-panel-background-color: darken(@dark-base, 1.5%);
-@tool-panel-border-color: @base-border-color;
+@tool-panel-border-color: @border;
 
 // Panel
 @panel-background-color: @dark-base;
 @panel-heading-background-color: @lighter-base;
-@panel-heading-border-color: fadein(@base-border-color, 10%);
+@panel-heading-border-color: fadein(@border, 10%);
 
 // Space Between.
 @gutter-background-color: @dark-base;
 
 // Pane
-@pane-item-background-color: @base-background-color;
-@pane-item-border-color: @base-border-color;
-
-// Input Elements
-@input-background-color: @base;
-@input-border-color: @base-border-color;
-
-// Buttons
-@button-background-color: @lighter-base;
-@button-border-color: @base-border-color;
+@pane-item-background-color: @background;
+@pane-item-border-color: @border;
 
 // Inset Panel
 @inset-panel-background-color: @darker-base;
-@inset-panel-border-color: @base-border-color;
+@inset-panel-border-color: @border;
+
 
 // Overlay Items
 @overlay-background-color: @dark-base;
 @overlay-border-color: @background-color-highlight;
 
-// Scrollbar
-@scrollbar-background-color: @brighter-base; // Needs to be opaque -> atom/atom/issues/4578
+
+// QScrollbar
+@scrollbar-background-color: @active-event-element-bg;
 @scrollbar-background-color-hover: lighten(@scrollbar-background-color, 5%);
 @scrollbar-background-color-active: darken(@scrollbar-background-color, 5%);
-@scrollbar-color: @primary-color;
-@scrollbar-color-hover: @primary-color-hover;
-@scrollbar-color-active: @primary-color-active;
+@scrollbar-color: @active-event-element;
+@scrollbar-color-hover: @active-event-element-hover;
+@scrollbar-color-active: @active-event-element-pressed;
+
 
 // Tree View Item
 @tree-view-background-color: @darker-base;
@@ -151,6 +201,7 @@
 @tree-view-resize-handle-background-color-hover: lighten(@tree-view-resize-handle-background-color, 5%);
 @tree-view-resize-handle-background-color-active: darken(@tree-view-resize-handle-background-color, 5%);
 
+
 // Tab Items
 @tab-bar-background-color: @base;
 @tab-bar-border-color: darken(@tab-background-color-active, 10%);
@@ -159,5 +210,33 @@
 @tab-background-color-active: @darker-base;
 @tab-background-color-active-hover: @bright-base;
 @tab-bar-after-background-color: @tab-background-color-active;
-@tab-border-color: @base-border-color;
+@tab-border-color: @border;
 @tab-active-border-bottom-color: @primary-color;
+
+
+@ui-site-color-1: @background-color-success; // green
+@ui-site-color-2: @background-color-info; // blue
+@ui-site-color-3: @background-color-warning; // orange
+@ui-site-color-4: #db2ff4; // purple
+@ui-site-color-5: #f5e11d; // yellow
+
+// Sizes
+
+@font-size: 11px;
+@input-font-size: 14px;
+
+@disclosure-arrow-size: 12px;
+
+@component-padding: 10px;
+@component-icon-padding: 5px;
+@component-icon-size: 16px;
+@component-line-height: 25px;
+@component-border-radius: 2px;
+
+@tree-view-item-height: 30px;
+
+@tab-height: 34px;
+
+// Other
+
+@font-family: 'Trebuchet MS', 'Segoe UI', Ubuntu, Cantarell, sans-serif;

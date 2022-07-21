@@ -1,0 +1,85 @@
+/**
+ * text.less
+ * ----------------------------------------------------------------------------
+ * Base element styling to be used throughout the theme.
+ *
+ * Purplest, Inc. Dark Theme - UI [1.0.2]
+ * (https://github.com/PurplestInc/purplest-inc-dark-ui/styles/text.less)
+ *
+ * Maintained by: Purplest, Inc.
+ * (https://github.com/PurplestInc)
+ * (https://github.com/RobDukarski)
+ *
+ * @version 1.0.0 (06/02/16)
+ * @license MIT
+ * @copyright (c) 2016 Purplest, Inc.
+ * (https://purplest.com)
+ * ============================================================================
+ */
+
+h1,
+h2,
+h3 {
+  line-height: 1em;
+  margin-bottom: 15px;
+  background: blue;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+a {
+	color: @secondary-color;
+	transition: all .1s linear;
+
+	&:focus,
+	&:hover {
+		color: @secondary-color-hover;
+	}
+
+	&:active {
+		color: @secondary-color-active;
+	}
+}
+
+label {
+  font-weight: normal;
+}
+
+pre {
+  background: @inset-panel-background-color;
+  border-radius: @component-border-radius;
+  border: none;
+  box-shadow: none;
+  color: @text-color;
+  margin: 0;
+}
+
+code {
+  .text(highlight);
+  background: @background-color-highlight;
+  border-radius: @component-border-radius;
+}
+
+table tr {
+  background: transparent;
+  transition: background .1s linear;
+
+  &:hover {
+    background: rgba(255, 255, 255, .05);
+  }
+}

@@ -11,53 +11,44 @@
  * ============================================================================
  */
 
+/**
+ * Checklist:
+ * 	 - [ ] *QAbstractScrollArea*
+ *	 - [ ] *QCheckBox*
+ *	 - [ ] *QComboBox*
+ *	 - [ ] *QDockWidget*
+ *	 - [ ] *QGroupBox*
+ *	 - [ ] *QHeaderView*
+ *	 - [ ] *QLabel*
+ *	 - [ ] *QLineEdit*
+ *	 - [ ] *QListView* / *QListWidget*
+ *	 - [ ] *QMainWindow*
+ *	 - [ ] *QMenu*
+ *	 - [ ] *QMenuBar*
+ *	 - [ ] *QProgressBar*
+ *	 - [ ] *QPushButton*
+ *	 - [ ] *QRadioButton*
+ *	 - [ ] *QScrollBar*
+ *	 - [ ] *QSizeGrip*
+ *	 - [ ] *QSlider*
+ *	 - [ ] *QSpinBox*
+ *	 - [ ] *QSplitter*
+ *	 - [ ] *QStatusBar*
+ *	 - [ ] *QTabWidget* and *QTabBar*
+ *	 - [ ] *QTableView* / *QTableWidget*
+ *	 - [ ] *QToolBar*
+ *	 - [ ] *QToolBox*
+ *	 - [ ] *QToolButton*
+ *	 - [ ] *QTreeView* / *QTreeWidget*
+ *	 - [ ] *QTreeWidgetItem*
+ */
+
+
 @import "colors.less";
+@import "text.less";
+//@import "richtext.less";
+@import "widgets/*.less";
 
 QAbstractItemView{
-	alternate-background-color: @base-background-color;
-}
-
-QWidget {
-	background: @app-background-color;
-	color: @bright-active;
-}
-
-QMainWindow {
-	/* Style the widget separators here. */
-}
-
-QTreeView {
-	/* Each item extends the length of its row */
-	show-decoration-selected: 1;
-
-	&::item{
-		color: @alt-color;
-
-		&:hover{
-			background-color: @tree-view-item-background-color-hover;
-		    color: @alt-color;
-		}
-
-		&:selected{
-			background: @tree-view-item-background-color-selected;
-			box-shadow: inset -1px  0   0 0 @base-border-color,
-	                    inset  0   -4px 0 0 @primary-color,
-	                    inset  0   -5px 0 0 @base-border-color,
-	                           0    1px 0 0 @base-border-color,
-	                           0   -1px 0 0 @base-border-color;
-	        //right: 0;
-	        //z-index: 1;
-
-			&:hover{
-				color: @alt-color-highlight;
-				background: @tree-view-item-background-color-selected-hover;
-			    box-shadow:        0    1px 0 0 @base-border-color,
-			                       0   -1px 0 0 @base-border-color,
-			                inset -1px  0   0 0 @base-border-color,
-			                inset  0   -4px 0 0 @primary-color-hover,
-			                inset  0   -5px 0 0 @base-border-color;
-				//right: 0;
-			}
-		}
-	}
+	alternate-background-color: @background;
 }
